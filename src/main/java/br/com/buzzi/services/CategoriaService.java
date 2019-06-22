@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.buzzi.domain.Categoria;
 import br.com.buzzi.repositories.CategoriaRepository;
+import br.com.buzzi.services.exception.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -16,6 +17,9 @@ public class CategoriaService {
 	
 	public Categoria buscar(Integer id) {
 		Optional<Categoria> obj = repo.findById(id);
+		if (!obj.isPresent()) {
+			throw new ObjectNotFoundException("Objeto não encontrado. Id: " + id + ", Tipo: " + Categoria.class.getName());
+		}
 		return obj.orElse(null);
 	}
 
