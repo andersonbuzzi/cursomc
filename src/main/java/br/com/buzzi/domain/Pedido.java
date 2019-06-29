@@ -47,8 +47,6 @@ public class Pedido implements Serializable {
 	public Pedido() {
 	}
 
-
-
 	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
 		super();
 		this.id = id;
@@ -56,8 +54,14 @@ public class Pedido implements Serializable {
 		this.setCliente(cliente);
 		this.setEnderecoDeEntrega(enderecoDeEntrega);
 	}
-
-
+	
+	public double getValorTotal() {
+		double soma = 0.0;
+		for (ItemPedido itemPedido : items) {
+			soma = soma + itemPedido.getSubTotal();
+		}
+		return soma;
+	}
 
 	public Integer getId() {
 		return id;
@@ -75,54 +79,37 @@ public class Pedido implements Serializable {
 		this.instante = instante;
 	}
 
-
-
 	public Endereco getEnderecoDeEntrega() {
 		return enderecoDeEntrega;
 	}
-
-
 
 	public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
 
-
-
 	public Pagamento getPagamento() {
 		return pagamento;
 	}
-
-
 
 	public void setPagamento(Pagamento pagamento) {
 		this.pagamento = pagamento;
 	}
 
-
-
 	public Cliente getCliente() {
 		return cliente;
 	}
-
-
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
-
-
 	public Set<ItemPedido> getItems() {
 		return items;
 	}
 
-
-
 	public void setItems(Set<ItemPedido> items) {
 		this.items = items;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -131,8 +118,6 @@ public class Pedido implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -150,7 +135,6 @@ public class Pedido implements Serializable {
 			return false;
 		return true;
 	}
-
 
 
 }
